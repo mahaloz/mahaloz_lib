@@ -1,0 +1,41 @@
+[defaults]
+any = [
+    "coreutils",
+    "binutils",
+    "wget",
+    "curl",
+    "git",
+    "vim",
+    "ipython3",
+    "tmux",
+    "htop",
+    "bat",
+    "clang-format"
+]
+macos = [
+    # window manager
+    "yabai",
+    # hotkey daemon
+    "skhd",
+]
+linux = [
+    "strace",
+    "ltrace",
+    "gdb",
+    "gdb-multiarch",
+    "gdbserver",
+    "g++",
+    "gcc",
+    "sshfs",
+    "automake",
+    "cmake",
+    "netcat",
+    "net-tools",
+    "nmap",
+    "socat",
+    "tcpdump",
+    "build-essential",
+    "fonts-powerline",
+    "fonts-mono"
+]
+
