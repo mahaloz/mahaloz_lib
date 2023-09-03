@@ -1,0 +1,11 @@
+commands = [
+    "cp .bashrc ~/.bashrc",
+    "cp .bash_profile ~/.bash_profile",
+    "wget https://starship.rs/install.sh",
+    "chmod +x install.sh",
+    "sudo sh install.sh -y",
+    "mkdir -p ~/.config",
+    "cp -r starship.toml ~/.config/",
+    "rm -f install.sh",
+]
+platforms = ["linux", "mac"]

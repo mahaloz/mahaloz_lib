@@ -1,14 +1,13 @@
-import platform
 import os
 from typing import List
 
-from .consts import SystemOS, SystemNotSetupError
-from .utils import run_command
+from ..system import SystemOS, run_command
+from .consts import SystemNotSetupError
 
 
 class Installer:
     def __init__(self, package_names=None):
-        self.os = self.discover_os()
+        self.os = SystemOS.discover_os()
         if package_names is not None:
             self.install_system_packages(package_names)
 
@@ -76,19 +75,3 @@ class Installer:
         if not self.command_is_installed(installer):
             raise SystemNotSetupError(f"Installer '{installer}' is not installed. Please install it.")
 
-
-    #
-    # Generic Utils
-    #
-
-
-    @staticmethod
-    def discover_os():
-        if platform.system() == 'Linux':
-            return SystemOS.LINUX
-        elif platform.system() == 'Darwin':
-            return SystemOS.MAC
-        elif platform.system() == 'Windows':
-            return SystemOS.WINDOWS
-        else:
-            return SystemOS.UNKNOWN

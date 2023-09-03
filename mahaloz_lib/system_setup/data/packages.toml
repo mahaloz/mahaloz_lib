@@ -10,9 +10,9 @@ any = [
     "tmux",
     "htop",
     "bat",
-    "clang-format"
+    "xclip",
 ]
-macos = [
+mac = [
     # window manager
     "yabai",
     # hotkey daemon
@@ -36,6 +36,6 @@ linux = [
     "tcpdump",
     "build-essential",
     "fonts-powerline",
-    "fonts-mono"
+    "clang-format",
 ]
 

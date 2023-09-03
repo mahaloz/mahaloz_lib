@@ -1,0 +1,4 @@
+commands = [
+    "cp ./.tmux.conf ~/.tmux.conf"
+]
+platforms = ["linux", "mac"]

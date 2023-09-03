@@ -1,0 +1,6 @@
+commands = [
+    "mkdir -p ~/.local/share/applications/",
+    "cp *.desktop ~/.local/share/applications"
+]
+platforms = ["linux"]
+#enabled = false

@@ -1,0 +1,4 @@
+commands = [
+    "cp ./lldbinit.py ~/lldbinit.py"
+]
+platforms = ["linux", "mac"]

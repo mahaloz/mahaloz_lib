@@ -1,0 +1,8 @@
+# use this line to strip for containers:
+# sed -i 's/\\u27a4 />/g' ~/.gdbinit-gef.py
+commands = [
+    "wget https://github.com/hugsy/gef/raw/main/gef.py",
+    "mv gef.py ~/.gdbinit-gef.py",
+    "echo source ~/.gdbinit-gef.py >> ~/.gdbinit",
+]
+platforms = ["linux", "mac"]

@@ -91,7 +91,11 @@ export TERM=xterm-256color
 
 # MACOS ONLY ADDITIONS
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    alias ls="gls --color" 
+    if [ -f ~/.git-completion.bash ]; then
+        . ~/.git-completion.bash
+    fi
+    export PATH="/opt/homebrew/bin/:$PATH"
+    alias ls="gls --color"
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export PATH="/usr/local/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -132,22 +136,22 @@ if [ "$USER" != "root" ]; then
     # virtual env
     export WORKON_HOME=~/.virtualenvs
     VIRTUALENVWRAPPER_PYTHON='python3'
-    source /home/mahaloz/.local/bin/virtualenvwrapper.sh
+    source virtualenvwrapper.sh
+    #source /home/mahaloz/.local/bin/virtualenvwrapper.sh
 
     # joern
     export PATH="$HOME/bin/joern-cli:$PATH"
 
-    
     # ruby 
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+    #export PATH="$HOME/.rbenv/bin:$PATH"
+    #eval "$(rbenv init -)"
+    #export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
     
     # java
-    source /etc/profile.d/gradle.sh
+    #source /etc/profile.d/gradle.sh
     
     # wasm
-    export PATH="/opt/wabt-1.0.29/bin:$PATH"
+    #export PATH="/opt/wabt-1.0.29/bin:$PATH"
     
     . "$HOME/.cargo/env"
 fi 
