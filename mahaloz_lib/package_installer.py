@@ -30,7 +30,7 @@ class PackageInstaller:
         installer = "apt"
         self.installer_is_installed(installer)
 
-        if not self.user_is_root:
+        if not self.user_is_root():
             installer = "sudo " + installer
 
         if update_first:
