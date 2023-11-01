@@ -41,7 +41,7 @@ class PackageInstaller:
         if stdout is None:
             print(f"Failed to install packages: {packages}")
 
-    def install_mac_packages(self, package_names: List[str], update_first=True):
+    def install_mac_packages(self, package_names: typing.List[str], update_first=True):
         installer = "brew"
         self.installer_is_installed(installer)
 
