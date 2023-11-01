@@ -48,7 +48,6 @@ class PackageInstaller:
         if update_first:
             self.run_command(f"{installer} update")
 
-        breakpoint()
         packages = " ".join(package_names)
         stdout = self.run_command(f"{installer} install {packages}")
         if stdout is None:
