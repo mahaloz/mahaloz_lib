@@ -1,33 +1,9 @@
-import subprocess
 import platform
-from typing import Optional
 from pathlib import Path
 import os
 import signal
 import shutil
-import re
 
-
-#
-# understand OS
-#
-
-class SystemOS:
-    LINUX = 'linux'
-    MAC = 'mac'
-    WINDOWS = 'windows'
-    UNKNOWN = 'unknown'
-
-    @staticmethod
-    def discover_os():
-        if platform.system() == 'Linux':
-            return SystemOS.LINUX
-        elif platform.system() == 'Darwin':
-            return SystemOS.MAC
-        elif platform.system() == 'Windows':
-            return SystemOS.WINDOWS
-        else:
-            return SystemOS.UNKNOWN
 
 #
 # run system commands
@@ -81,41 +57,3 @@ class unix_timeout:
     def __exit__(self, type_, value, traceback):
         signal.alarm(0)
 
-
-def user_is_root():
-    if SystemOS.discover_os() not in [SystemOS.LINUX, SystemOS.MAC]:
-        raise NotImplementedError()
-    return os.getuid() == 0
-
-
-def run_command(command: str, as_shell=False, normalize_cmd=True, is_root=None) -> Optional[str]:
-    """
-    Runs a command in the system. Returns either the stdout or None if it failed.
-
-    :param command:
-    :param as_shell:
-    :param normalize_cmd:  Normalize the command before running it. This is useful for commands that use ~ or $.
-    :return:
-    """
-    replaced_commands = list()
-    if normalize_cmd:
-        shell_strs = ["&&", "||", ">", "<", "|", ";", "&", "*", "$"]
-        if any([s in command for s in shell_strs]):
-            as_shell = True
-
-        if "~" in command:
-            # XXX: if a space is in this, it will break
-            command = command.replace("~", str(Path.home()))
-
-        is_root = is_root or user_is_root()
-        if is_root and "sudo" in command:
-            command = command.replace("sudo ", "")
-
-    cmd_list = command.split(' ') if not as_shell else command
-    try:
-        out = subprocess.run(cmd_list, shell=as_shell, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        text = out.stdout.decode('utf-8').strip()
-    except subprocess.CalledProcessError:
-        text = None
-
-    return text

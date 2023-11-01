@@ -4,8 +4,8 @@ import logging
 
 import toml
 
-from .installer import Installer
-from ..system import run_command, WorkDirContext
+from ..system import WorkDirContext
+from ..package_installer import PackageInstaller
 
 
 _l = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ def setup_system(install_pkgs=True,  install_configs=True):
     # install system packages
     #
 
-    inst = Installer()
+    inst = PackageInstaller()
     if install_pkgs:
         packages = _load_packages()
         default_packages = packages["defaults"]
@@ -72,7 +72,7 @@ def setup_system(install_pkgs=True,  install_configs=True):
             _l.info(f"Setting up {config_name}...")
             for cmd in config["commands"]:
                 with WorkDirContext(FILE_LOCATION / "data" / "configs" / config_name):
-                    output = run_command(cmd, is_root=inst.user_is_root)
+                    output = PackageInstaller.run_command(cmd, is_root=inst.user_is_root)
                     if output is None:
                         _l.warning(f"Failed to install {config_name} on command {cmd}. Skipping...")
                         break
